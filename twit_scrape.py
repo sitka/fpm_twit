@@ -1,4 +1,4 @@
- 
+
 #Twitter API Keys are stored in a secret file
 from twitter_API import consumer_key, consumer_secret, access_token, access_token_sectre
 import tweepy
@@ -8,8 +8,8 @@ from textblob import TextBlob
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_sectre)
 
-#twitter is now authenticated
 
+#twitter is now authenticated
 
 api = tweepy.API(auth)
 
@@ -22,14 +22,14 @@ csvWriter = csv.writer(csvFile)
 
 for tweet in tweepy.Cursor(api.search,
 					q = "#ourvoicesarevital", 
-					since = "2017-05-17",
-					until = "2017-05-18",
-					lang = "en").items(10):
+					since = "2017-05-19",
+					until = "2017-05-20",
+					lang = "en").items():
 
 #write rows to CSV file
-		analysis = TextBlob(tweet.text)
-		csvWriter.writerow([tweet.created_at, tweet.text.encode('utf-8'), tweet.retweet_count, tweet.user.screen_name, analysis.sentiment])
-		print tweet.created_at, tweet.text, analysis.sentiment,
+#		analysis = TextBlob(tweet.text)
+		csvWriter.writerow([tweet.user.screen_name, tweet.created_at, tweet.text.encode('utf-8'), tweet.retweet_count])
+		print tweet.created_at, tweet.text, 
 
 csvFile.close()
 
